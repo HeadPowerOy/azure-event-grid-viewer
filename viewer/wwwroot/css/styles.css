@@ -1,0 +1,135 @@
+﻿.material-icons {
+    width: 24px;
+    height: 24px;
+    user-select: none;
+}
+
+button.icon-button {
+    padding: 0 1rem;
+    line-height: normal;
+}
+
+button.toggled {
+    background-color: #606c76;
+    border-color: #606c76;
+}
+
+.input-with-clear {
+    display: flex;
+}
+
+.input-with-clear > .input-clear {
+    margin: 6px 8px 0 -32px;
+    cursor: pointer;
+    display: none;
+}
+
+.input-with-clear > input:not(:placeholder-shown) + .input-clear {
+    display: inline-block;
+}
+
+.title-container {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-container > .environment {
+    border-bottom: 1px solid #9b4dca;
+    cursor: help;
+}
+
+.subtitle-container {
+    margin-top: -1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subtitle-container > .actions {
+    display: flex;
+    column-gap: 0.2rem;
+}
+
+.filter-container {
+    display: flex;
+    column-gap: 1rem;
+}
+
+.filter-container > div {
+    flex-grow: 1;
+}
+
+.connection-disconnected {
+    margin: 1rem 0;
+    color: #F44336;
+    text-align: center;
+    font-weight: 400;
+}
+
+.events-table {
+    margin-top: 2rem;
+}
+
+.events-table th:first-child {
+    width: 1px; /* As small as possible */
+    padding-right: 0;
+}
+
+.events-table th:first-child > .expand-collapse-all {
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.events-table tr.event-info {
+    background-color: #f9f9f9;
+}
+
+.events-table tr.event-info:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+.events-table td {
+    padding: 0.8rem 1.5rem;
+}
+
+.events-table tr.event-info > td:first-child {
+    width: 1px; /* As small as possible */
+    padding-right: 0;
+}
+
+.events-table tr.event-info .expand-collapse {
+    margin-top: 3px;
+}
+
+.events-table tr.event-data > td {
+    padding: 0 0 0.8rem 0;
+}
+
+.events-table tr.event-data:last-child > td {
+    border-bottom: none;
+    padding: 0;
+}
+
+.events-table tr.event-data > td > pre {
+    margin: 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.events-table tr.event-data > td > pre > code {
+    font-size: 13px;
+}
+
+.events-table tr.no-rows > td:first-child {
+    text-align: center;
+    font-weight: 300;
+    border: none;
+}
+
+@media (max-width: 959.98px) {
+    .filter-container {
+        flex-direction: column;
+    }
+}

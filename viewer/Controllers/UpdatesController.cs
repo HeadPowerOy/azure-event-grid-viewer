@@ -18,30 +18,27 @@ namespace viewer.Controllers
     [Route("api/[controller]")]
     public class UpdatesController : Controller
     {
-        #region Data Members
+        #region Data members
 
-        private bool EventTypeSubcriptionValidation
-            => HttpContext.Request.Headers["aeg-event-type"].FirstOrDefault() ==
-               "SubscriptionValidation";
+        private bool EventTypeSubcriptionValidation => HttpContext.Request.Headers["aeg-event-type"].FirstOrDefault() == "SubscriptionValidation";
 
-        private bool EventTypeNotification
-            => HttpContext.Request.Headers["aeg-event-type"].FirstOrDefault() ==
-               "Notification";
+        private bool EventTypeNotification => HttpContext.Request.Headers["aeg-event-type"].FirstOrDefault() == "Notification";
 
         private readonly IHubContext<GridEventsHub> _hubContext;
 
-        #endregion
+        #endregion Data members
 
         #region Constructors
 
-        public UpdatesController(IHubContext<GridEventsHub> gridEventsHubContext)
+        public UpdatesController(
+            IHubContext<GridEventsHub> gridEventsHubContext)
         {
-            this._hubContext = gridEventsHubContext;
+            _hubContext = gridEventsHubContext;
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region Public Methods
+        #region Public methods
 
         [HttpOptions]
         public async Task<IActionResult> Options()
@@ -88,17 +85,16 @@ namespace viewer.Controllers
             }
         }
 
-        #endregion
+        #endregion Public methods
 
-        #region Private Methods
+        #region Private methods
 
         private async Task<JsonResult> HandleValidation(string jsonContent)
         {
-            var gridEvent =
-                JsonConvert.DeserializeObject<List<GridEvent<Dictionary<string, string>>>>(jsonContent)
+            var gridEvent = JsonConvert.DeserializeObject<List<GridEvent<Dictionary<string, string>>>>(jsonContent)
                     .First();
 
-            await this._hubContext.Clients.All.SendAsync(
+            await _hubContext.Clients.All.SendAsync(
                 "gridupdate",
                 gridEvent.Id,
                 gridEvent.EventType,
@@ -122,7 +118,7 @@ namespace viewer.Controllers
                 // Invoke a method on the clients for 
                 // an event grid notiification.                        
                 var details = JsonConvert.DeserializeObject<GridEvent<dynamic>>(e.ToString());
-                await this._hubContext.Clients.All.SendAsync(
+                await _hubContext.Clients.All.SendAsync(
                     "gridupdate",
                     details.Id,
                     details.EventType,
@@ -139,14 +135,13 @@ namespace viewer.Controllers
             var details = JsonConvert.DeserializeObject<CloudEvent<dynamic>>(jsonContent);
             var eventData = JObject.Parse(jsonContent);
 
-            await this._hubContext.Clients.All.SendAsync(
+            await _hubContext.Clients.All.SendAsync(
                 "gridupdate",
                 details.Id,
                 details.Type,
                 details.Subject,
                 details.Time,
-                eventData.ToString()
-            );
+                eventData.ToString());
 
             return Ok();
         }
@@ -173,6 +168,6 @@ namespace viewer.Controllers
             return false;
         }
 
-        #endregion
+        #endregion Private methods
     }
 }

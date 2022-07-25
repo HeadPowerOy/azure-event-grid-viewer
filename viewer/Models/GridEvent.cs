@@ -2,7 +2,7 @@ using System;
 
 namespace viewer.Models
 {
-    public class GridEvent<T> where T: class
+    public class GridEvent<T> where T : class
     {
         public string Id { get; set;}
         public string EventType { get; set;}
